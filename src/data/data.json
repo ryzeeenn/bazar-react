@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nama": "Kerajinan Tangan",
+    "harga": "Rp 25.000",
+    "deskripsi": "Dibuat dari bahan daur ulang.",
+    "gambar": "https://images.unsplash.com/photo-1581091870622-7b8a9b6dfd3e"
+  },
+  {
+    "id": 2,
+    "nama": "Kue Kering",
+    "harga": "Rp 30.000",
+    "deskripsi": "Dibuat oleh siswa jurusan tata boga.",
+    "gambar": "https://images.unsplash.com/photo-1612874742278-4f6c4f9f3f33"
+  },
+  {
+    "id": 3,
+    "nama": "Kaos Sablon",
+    "harga": "Rp 75.000",
+    "deskripsi": "Desain orisinal karya siswa jurusan DKV.",
+    "gambar": "https://images.unsplash.com/photo-1618354691373-d1c36b60c422"
+  }
+]

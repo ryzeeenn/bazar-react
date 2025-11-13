@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🌞 Gaya dasar untuk mode terang */
+body {
+  @apply bg-white text-gray-800 font-sans;
+}
+
+/* Navbar */
+.navbar {
+  @apply bg-white shadow-md sticky top-0 z-50 flex justify-between items-center px-8 py-4;
+}
+
+/* Card */
+.card {
+  @apply bg-white rounded-2xl shadow hover:shadow-lg transition-all p-4;
+}
+
+/* Button */
+.btn-primary {
+  @apply bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition;
+}
