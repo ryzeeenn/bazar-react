@@ -1,40 +1,60 @@
-import { useParams, Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import data from "../data/data.json";
+import { useParams, useNavigate } from "react-router-dom";
 
-function Detail() {
+export default function Detail() {
   const { id } = useParams();
-  const item = data.find((p) => p.id.toString() === id);
+  const navigate = useNavigate();
 
-  if (!item) {
-    return <p>Produk tidak ditemukan!</p>;
-  }
+  const products = [
+    {
+      id: 1,
+      name: "Sneakers Putih",
+      price: 350000,
+      img: "/images/sepatu.jpg",
+      stock: 10
+    },
+    {
+      id: 2,
+      name: "Thermaltake CPU Gaming",
+      price: 7540000,
+      img: "/images/cpu1.jpg",
+      stock: 5
+    },
+    {
+      id: 3,
+      name: "STONE ISLAND Hooded Jacket",
+      price: 4010000,
+      img: "/images/jaket1.jpg",
+      stock: 3
+    },
+    {
+      id: 4,
+      name: "REI Co-op Backpacking",
+      price: 220000,
+      img: "/images/tas.jpg",
+      stock: 12
+    }
+  ];
+
+  const product = products.find((p) => p.id == id);
+
+  const handleCheckout = () => {
+    navigate("/checkout", { state: product });
+  };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="max-w-xl mx-auto bg-white rounded-2xl shadow-md p-6"
-    >
-      <motion.img
-        src={item.gambar || "https://via.placeholder.com/400x300"}
-        alt={item.nama}
-        className="rounded-lg w-full h-64 object-cover mb-4"
-        whileHover={{ scale: 1.03 }}
-        transition={{ duration: 0.3 }}
-      />
-      <h2 className="text-3xl font-bold mb-2">{item.nama}</h2>
-      <p className="text-lg text-blue-700 font-semibold mb-3">{item.harga}</p>
-      <p className="text-gray-700 mb-6">{item.deskripsi}</p>
-      <Link
-        to="/list"
-        className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+    <div className="p-5">
+      <img src={product.img} className="rounded mb-3 w-64" />
+
+      <h2 className="text-2xl font-bold">{product.name}</h2>
+      <p className="text-gray-700">Rp{product.price.toLocaleString()}</p>
+      <p className="text-gray-500 mb-3">Stok: {product.stock}</p>
+
+      <button
+        onClick={handleCheckout}
+        className="bg-green-600 text-white px-4 py-2 rounded"
       >
-        Kembali ke Daftar
-      </Link>
-    </motion.div>
+        Checkout
+      </button>
+    </div>
   );
 }
-
-export default Detail;

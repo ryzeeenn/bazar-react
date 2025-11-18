@@ -1,29 +1,54 @@
+import { Link } from "react-router-dom";
+
 export default function List() {
+  const products = [
+    {
+      id: 1,
+      name: "Sneakers Putih",
+      price: 350000,
+      img: "/images/sepatu.jpg",
+      stock: 10
+    },
+    {
+      id: 2,
+      name: "Thermaltake CPU Gaming",
+      price: 7540000,
+      img: "/images/cpu1.jpg",
+      stock: 5
+    },
+    {
+      id: 3,
+      name: "STONE ISLAND Hooded Jacket",
+      price: 4010000,
+      img: "/images/jaket1.jpg",
+      stock: 3
+    },
+    {
+      id: 4,
+      name: "REI Co-op Backpacking",
+      price: 220000,
+      img: "/images/tas.jpg",
+      stock: 12
+    }
+  ];
+
   return (
     <div className="p-10 grid grid-cols-2 md:grid-cols-4 gap-6">
-      <div className="border rounded-lg p-3 shadow">
-        <img src="/images/sepatu.jpg" alt="Sepatu" className="rounded-md mb-2" />
-        <h3 className="font-semibold">Sneakers Putih</h3>
-        <p className="text-gray-600">Rp350.000</p>
-      </div>
+      {products.map((p) => (
+        <div key={p.id} className="border rounded-lg p-3 shadow">
+          <img src={p.img} className="rounded-md mb-2" />
+          <h3 className="font-semibold">{p.name}</h3>
+          <p className="text-gray-600">Rp{p.price.toLocaleString()}</p>
+          <p className="text-sm text-gray-500">Stok: {p.stock}</p>
 
-      <div className="border rounded-lg p-3 shadow">
-       <img src="/images/cpu1.jpg" alt="Sepatu" className="rounded-md mb-2" />
-        <h3 className="font-semibold">Thermaltake  CPU Gaming PC</h3>
-        <p className="text-gray-600">Rp7.540.000</p>
-      </div>
-
-      <div className="border rounded-lg p-3 shadow">
-       <img src="/images/jaket1.jpg" alt="Sepatu" className="rounded-md mb-2" />
-        <h3 className="font-semibold">STONE ISLAND Hooded Jacket</h3>
-        <p className="text-gray-600">Rp4.010.000</p>
-      </div>
-
-      <div className="border rounded-lg p-3 shadow">
-        <img src="/images/tas.jpg" alt="Sepatu" className="rounded-md mb-2" />
-        <h3 className="font-semibold">REI Co-op Backpacking </h3>
-        <p className="text-gray-600">Rp220.000</p>
-      </div>
+          <Link
+            to={`/detail/${p.id}`}
+            className="mt-2 block bg-blue-600 text-white text-center py-1 rounded"
+          >
+            Beli
+          </Link>
+        </div>
+      ))}
     </div>
   );
 }
