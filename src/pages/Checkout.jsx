@@ -1,28 +1,31 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function Checkout() {
-  const { state: product } = useLocation();
+  const { id } = useParams();
   const navigate = useNavigate();
+  const [product, setProduct] = useState(null);
 
-  if (!product) {
-    return (
-      <div className="p-5">
-        <p className="text-red-500">Tidak ada produk.</p>
-
-        <button
-          className="mt-3 bg-gray-700 text-white px-3 py-1 rounded"
-          onClick={() => navigate("/list")}
-        >
-          Kembali ke List
-        </button>
-      </div>
-    );
-  }
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("products")) || [];
+    const found = data.find(p => p.id === Number(id));
+    setProduct(found);
+  }, [id]);
 
   const handlePay = () => {
-    alert("Pembelian berhasil!");
-    navigate("/list"); // balik ke list
+    const data = JSON.parse(localStorage.getItem("products"));
+
+    const updated = data.map(p =>
+      p.id === Number(id) ? { ...p, stock: p.stock - 1 } : p
+    );
+
+    localStorage.setItem("products", JSON.stringify(updated));
+
+    alert("Pembelian Berhasil!");
+    navigate("/list");
   };
+
+  if (!product) return <p>Produk tidak ditemukan</p>;
 
   return (
     <div className="p-5">
@@ -40,6 +43,13 @@ export default function Checkout() {
           className="mt-4 bg-blue-600 text-white px-3 py-2 rounded w-full"
         >
           Bayar Sekarang
+        </button>
+
+        <button
+          className="mt-3 bg-gray-300 text-black px-3 py-2 rounded w-full"
+          onClick={() => navigate("/list")}
+        >
+          Kembali
         </button>
       </div>
     </div>
